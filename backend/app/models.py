@@ -1,3 +1,4 @@
+from pgvector import Vector
 from sqlalchemy import Column, Integer, String, Text, ForeignKey
 from sqlalchemy.orm import declarative_base, relationship
 from sqlalchemy.dialects.postgresql import UUID
@@ -26,6 +27,8 @@ class Chunk(Base):
     chunk_index = Column(Integer)
 
 # placeholder for later WILL CHANGE Later to vector(1536)
-    embedding = Column(Text)  
+    from pgvector.sqlalchemy import Vector
+
+    embedding = Column(Vector(768))  
 
     document = relationship("Document", back_populates="chunks")
