@@ -1,6 +1,6 @@
 from app.services.rag_pipeline import generate_answer
 
-result = generate_answer("What are some of the company benefits?", top_k=5)
+result = generate_answer("give all information about Military leave?", top_k=5)
 
 print("\nQUESTION:")
 print(result["query"])
