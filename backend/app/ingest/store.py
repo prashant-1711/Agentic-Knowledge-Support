@@ -1,8 +1,16 @@
+from fileinput import filename
+
 from sqlalchemy.orm import Session
 from app.models import Document, Chunk
 
 
 def store_document(db: Session, filename: str):
+    existing = db.query(Document).filter_by(filename=filename).first()
+
+    if existing:
+        print(f"⚠️ Skipping already ingested file: {filename}")
+        return None
+
     doc = Document(filename=filename)
     db.add(doc)
     db.commit()

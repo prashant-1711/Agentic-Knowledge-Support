@@ -1,5 +1,5 @@
 from pgvector import Vector
-from sqlalchemy import Column, Integer, String, Text, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import declarative_base, relationship
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy import func
@@ -10,7 +10,7 @@ Base = declarative_base()
 
 class Document(Base):
     __tablename__ = "documents"
-
+    __table_args__ = (UniqueConstraint("filename", name="uq_documents_filename"),)
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     filename = Column(String, nullable=False)
 

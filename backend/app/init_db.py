@@ -1,5 +1,5 @@
-from db import engine
-from models import Base
+from app.db import engine
+from app.models import Base
 
 print("Creating tables...")
 

@@ -9,7 +9,7 @@ DATA_PATH = r"D:\Agentic Knowledge Support\data\sample_doc"
 
 def run():
     db = SessionLocal()
-
+    
     docs = load_pdfs_from_folder(DATA_PATH)
 
     for doc in docs:
@@ -18,6 +18,8 @@ def run():
         # 1. store document
         db_doc = store_document(db, doc["filename"])
 
+        if db_doc is None:
+            continue
         # 2. chunk text
         chunks = make_chunk_records(doc["text"], doc["filename"])
 
