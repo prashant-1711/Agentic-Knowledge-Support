@@ -111,4 +111,4 @@ with gr.Blocks(css=CSS, title="IKS Assistant") as demo:
         )
 
 demo.queue()
-demo.launch()
+demo.launch(share = True)

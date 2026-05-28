@@ -42,3 +42,6 @@ gradio_cached_examples/
 
 # Pytest cache
 .pytest_cache/
+
+.gradio
+
