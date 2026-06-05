@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+mcp
+google-generativeai
+sqlalchemy
+psycopg2-binary
+pgvector
+asyncpg
+python-dotenv
+pydantic
+httpx
+websockets
+loguru
+sentence-transformers
+pypdf
+numpy
+pandas

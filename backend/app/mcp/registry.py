@@ -1,6 +1,6 @@
 from typing import Dict, Callable
 
-from mcp.schemas import ToolMetadata
+from app.mcp.schemas import ToolMetadata
 
 
 class ToolRegistry:
