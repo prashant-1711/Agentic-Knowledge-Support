@@ -1,4 +1,5 @@
 import asyncio
+from urllib import response
 
 from app.mcp.registry import ToolRegistry
 from app.mcp.schemas import ToolMetadata
@@ -9,10 +10,12 @@ from app.agents.orchestrator import AgentOrchestrator
 
 
 # Fake RAG tool
-async def rag_search_tool(query: str):
+# async def rag_search_tool(query: str):
 
-    return f"RAG Result for: {query}"
+#     return f"RAG Result for: {query}"
 
+#real rag tool
+from app.tools.rag_search_tool import rag_search_tool
 
 async def main():
 
@@ -50,7 +53,19 @@ async def main():
         "What is the leave policy?"
     )
 
-    print(response)
+    print("\n=== ANSWER ===\n")
+    print(response.response)
+
+    print("\n=== TOOLS USED ===\n")
+    print(response.tools_used)
+
+    print("\n=== SOURCES ===\n")
+
+    for source in response.metadata["sources"]:
+        print(
+        f"{source['filename']} "
+        f"(chunk {source['chunk_index']})"
+        )
 
 
 if __name__ == "__main__":

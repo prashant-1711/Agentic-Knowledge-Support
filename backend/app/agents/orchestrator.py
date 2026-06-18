@@ -1,3 +1,5 @@
+from unittest import result
+
 from app.mcp.schemas import (
     AgentResponse,
     ToolRequest
@@ -53,7 +55,12 @@ class AgentOrchestrator:
             )
 
         # Step 6 - Return final response
+        result = tool_response.result
+
         return AgentResponse(
-            response=str(tool_response.result),
-            tools_used=[selected_tool]
-        )
+            response=result["answer"],
+            tools_used=[selected_tool],
+            metadata={
+            "sources": result["sources"]
+                    }
+)
