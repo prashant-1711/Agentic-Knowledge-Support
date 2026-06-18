@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-from app.services.rag_pipeline import generate_answer
+from app.mcp.client import get_orchestrator
 
 app = FastAPI()
+
+orchestrator = get_orchestrator()
 
 
 class QueryRequest(BaseModel):
@@ -16,6 +18,14 @@ def root():
 
 
 @app.post("/ask")
-def ask_question(request: QueryRequest):
-    result = generate_answer(request.query)
-    return result
+async def ask_question(request: QueryRequest):
+
+    result = await orchestrator.process_query(
+        request.query
+    )
+
+    return {
+        "answer": result.response,
+        "tools_used": result.tools_used,
+        "metadata": result.metadata
+    }
